@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños Eug</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f0f1e;
+            overflow-x: hidden;
+            padding-bottom: 120px; /* Espacio para el reproductor */
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 30px #8a2be2;
+        }
+        
+        .neon-border {
+            box-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 30px #8a2be2;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .floating:hover {
+            transform: scale(1.05);
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+        }
+        
+        .ukelele {
+            position: relative;
+            width: 200px;
+            height: 250px;
+            margin: 0 auto;
+        }
+        
+        .ukelele-body {
+            position: absolute;
+            width: 150px;
+            height: 180px;
+            background-color: #d4a574;
+            border-radius: 50%;
+            top: 60px;
+            left: 25px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .ukelele:hover .ukelele-body {
+            background-color: #e5b884;
+        }
+        
+        .ukelele-hole {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #0f0f1e;
+            border-radius: 50%;
+            top: 90px;
+            left: 70px;
+        }
+        
+        .ukelele-neck {
+            position: absolute;
+            width: 30px;
+            height: 100px;
+            background-color: #8b4513;
+            top: 0;
+            left: 85px;
+        }
+        
+        .ukelele-head {
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            background-color: #8b4513;
+            border-radius: 10px 10px 0 0;
+            top: -20px;
+            left: 75px;
+        }
+        
+        .ukelele-string {
+            position: absolute;
+            width: 2px;
+            height: 200px;
+            background-color: #f5f5f5;
+            top: 10px;
+        }
+        
+        .string-1 { left: 92px; }
+        .string-2 { left: 97px; }
+        .string-3 { left: 102px; }
+        .string-4 { left: 107px; }
+        
+        .mask {
+            position: relative;
+            width: 180px;
+            height: 100px;
+            background-color: #2d2d2d;
+            border-radius: 90px 90px 0 0;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .mask-light {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #8a2be2;
+            border-radius: 50%;
+            top: 30px;
+            box-shadow: 0 0 20px #8a2be2;
+        }
+        
+        .light-left { left: 40px; animation: blink 3s infinite; }
+        .light-right { right: 40px; animation: blink 3s infinite 1.5s; }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .music-note {
+            position: absolute;
+            font-size: 24px;
+            color: #8a2be2;
+            animation: music-float 5s linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes music-float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-300px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .instruction {
+            font-size: 14px;
+            color: #a78bfa;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        /* Estilos del reproductor */
+        .music-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(22, 33, 62, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(138, 43, 226, 0.3);
+            padding: 15px;
+            z-index: 100;
+            box-shadow: 0 -5px 20px rgba(138, 43, 226, 0.3);
+        }
+        
+        .player-container {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .player-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+        }
+        
+        .player-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .player-info {
+            flex-grow: 1;
+        }
+        
+        .song-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+        
+        .artist-name {
+            font-size: 14px;
+            color: #a78bfa;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .control-btn {
+            background: rgba(138, 43, 226, 0.7);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: rgba(138, 43, 226, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .volume-icon {
+            color: #a78bfa;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(138, 43, 226, 0.3);
+            outline: none;
+            border-radius: 2px;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #8a2be2;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #8a2be2;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        
+        .youtube-player {
+            position: fixed;
+            top: -1000px;
+            left: -1000px;
+            width: 1px;
+            height: 1px;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex flex-col items-center justify-center text-white p-4">
+    <div class="container max-w-4xl mx-auto text-center">
+        <header class="mb-8">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 neon-text">¡Feliz Cumpleaños!</h1>
+            <div class="mask mb-8">
+                <div class="mask-light light-left"></div>
+                <div class="mask-light light-right"></div>
+            </div>
+        </header>
+        
+        <main>
+            <section class="mb-12">
+                <div class="ukelele floating mb-8" id="ukelele">
+                    <div class="ukelele-body"></div>
+                    <div class="ukelele-hole"></div>
+                    <div class="ukelele-neck"></div>
+                    <div class="ukelele-head"></div>
+                    <div class="ukelele-string string-1"></div>
+                    <div class="ukelele-string string-2"></div>
+                    <div class="ukelele-string string-3"></div>
+                    <div class="ukelele-string string-4"></div>
+                </div>
+                <p class="instruction">Haz clic en el ukelele para un efecto especial</p>
+                
+                <div class="bg-black bg-opacity-40 p-6 rounded-xl neon-border">
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-4">¡Hola Eugue!</h2>
+                    <p class="text-lg mb-4">Feliz cumpleaños espero q te las pases bien en tu día especial.</p>
+                    <p class="text-lg mb-4">Sabes k tequiero y que en muy poco tiempo te convertiste en una persona muy especial para mí.</p>
+                    <p class="text-lg mb-4">Eres una niña muy graciosa y me caes muy bien.</p>
+                    <p class="text-lg">Tekiero muchísimo y feliz cumpleaños amika.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Elementos para animaciones -->
+    <div id="musicNotesContainer"></div>
+    <div id="confettiContainer"></div>
+    
+    <!-- YouTube Player -->
+    <div id="youtubePlayer" class="youtube-player"></div>
+    
+    <!-- Mini Reproductor -->
+    <div class="music-player">
+        <div class="player-container">
+            <div class="player-image">
+                <img src="https://img.youtube.com/vi/DevwFKEFrfo/default.jpg" alt="Ghost">
+            </div>
+            <div class="player-info">
+                <div class="song-title">Ghost</div>
+                <div class="artist-name">BoyWithUke</div>
+            </div>
+            <div class="player-controls">
+                <button class="control-btn" id="playPauseBtn">
+                    <i class="fas fa-play" id="playPauseIcon"></i>
+                </button>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up volume-icon"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // YouTube Player
+        let player;
+        let isPlaying = false;
+        
+        // Cargar la API de YouTube
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+        // Crear el reproductor de YouTube
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtubePlayer', {
+                height: '1',
+                width: '1',
+                videoId: 'DevwFKEFrfo', // ID del video de Ghost - BoyWithUke
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'DevwFKEFrfo',
+                    'mute': 0,
+                    'start': 20 // Comenzar en el segundo 20 (0:20)
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            // Establecer volumen inicial
+            player.setVolume(30);
+        }
+        
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                document.getElementById('playPauseIcon').className = 'fas fa-pause';
+            } else if (event.data == YT.PlayerState.PAUSED) {
+                isPlaying = false;
+                document.getElementById('playPauseIcon').className = 'fas fa-play';
+            } else if (event.data == YT.PlayerState.ENDED) {
+                // Cuando termina el video, volver al segundo 20 y reproducir
+                player.seekTo(20);
+                player.playVideo();
+            }
+        }
+        
+        // Control de reproducción
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playPauseIcon = document.getElementById('playPauseIcon');
+        
+        playPauseBtn.addEventListener('click', function() {
+            if (player) {
+                if (isPlaying) {
+                    player.pauseVideo();
+                } else {
+                    // Si la canción ya terminó, volver al segundo 20 antes de reproducir
+                    if (player.getCurrentTime() >= player.getDuration() - 1) {
+                        player.seekTo(20);
+                    }
+                    player.playVideo();
+                }
+            }
+        });
+        
+        // Control de volumen
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeIcon = document.querySelector('.volume-icon');
+        
+        volumeSlider.addEventListener('input', function() {
+            if (player) {
+                player.setVolume(this.value);
+                
+                // Actualizar el ícono del volumen según el nivel
+                if (this.value == 0) {
+                    volumeIcon.className = 'fas fa-volume-mute volume-icon';
+                } else if (this.value < 50) {
+                    volumeIcon.className = 'fas fa-volume-down volume-icon';
+                } else {
+                    volumeIcon.className = 'fas fa-volume-up volume-icon';
+                }
+            }
+        });
+        
+        // Efecto al hacer clic en el ukelele
+        document.getElementById('ukelele').addEventListener('click', function() {
+            createMusicNotes();
+            createConfetti();
+            
+            // Efecto de vibración
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'floating 3s ease-in-out infinite';
+            }, 10);
+        });
+        
+        // Crear notas musicales animadas
+        function createMusicNotes() {
+            const container = document.getElementById('musicNotesContainer');
+            
+            const notes = ['♪', '♫', '♬', '♩', '♭', '♯'];
+            
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const note = document.createElement('div');
+                    note.className = 'music-note';
+                    note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                    note.style.left = Math.random() * 100 + '%';
+                    note.style.animationDelay = Math.random() * 2 + 's';
+                    note.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    container.appendChild(note);
+                    
+                    setTimeout(() => {
+                        note.remove();
+                    }, 5000);
+                }, i * 100);
+            }
+        }
+        
+        // Crear confeti
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            
+            const colors = ['#8a2be2', '#ff00ff', '#00ffff', '#ffff00', '#ff7700'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confettiPiece = document.createElement('div');
+                    confettiPiece.className = 'confetti';
+                    confettiPiece.style.left = Math.random() * 100 + '%';
+                    confettiPiece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confettiPiece.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    confettiPiece.style.animation = 'confetti-fall linear forwards';
+                    container.appendChild(confettiPiece);
+                    
+                    setTimeout(() => {
+                        confettiPiece.remove();
+                    }, 5000);
+                }, i * 50);
+            }
+        }
+        
+        // Crear notas musicales periódicamente
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                const container = document.getElementById('musicNotesContainer');
+                const note = document.createElement('div');
+                note.className = 'music-note';
+                note.textContent = ['♪', '♫', '♬', '♩', '♭', '♯'][Math.floor(Math.random() * 6)];
+                note.style.left = Math.random() * 100 + '%';
+                note.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(note);
+                
+                setTimeout(() => {
+                    note.remove();
+                }, 5000);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
