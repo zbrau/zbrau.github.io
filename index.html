@@ -701,6 +701,38 @@
         .music-error.show {
             opacity: 1;
         }
+        
+        /* Reproductor de audio visible */
+        .audio-player-container {
+            margin-top: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+        }
+        
+        .audio-player-container audio {
+            width: 100%;
+            border-radius: 5px;
+        }
+        
+        /* Botón de descarga */
+        .download-btn {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background: rgba(30, 215, 96, 0.2);
+            color: #1db954;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: rgba(30, 215, 96, 0.3);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -856,9 +888,6 @@
         No se pudo reproducir la música. Por favor, intenta más tarde.
     </div>
     
-    <!-- Reproductor de audio oculto -->
-    <audio id="audioPlayer" style="display: none;"></audio>
-    
     <div class="music-player">
         <div class="player-container">
             <div class="player-image">
@@ -884,6 +913,10 @@
                 </div>
             </div>
         </div>
+        <!-- Reproductor de audio visible -->
+        <div class="audio-player-container" id="audioPlayerContainer" style="display: none;">
+            <audio id="audioPlayer" controls></audio>
+        </div>
     </div>
     
     <script>
@@ -893,31 +926,36 @@
                 id: '2tUBqZG2Ab', 
                 title: 'Long Drives', 
                 duration: '2:31',
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1mHNF4eI2RYWhFQYiLAZvL5KWSkjWGr_m'
+                audioUrl: 'https://drive.google.com/uc?export=download&id=1mHNF4eI2RYWhFQYiLAZvL5KWSkjWGr_m',
+                downloadUrl: 'https://drive.google.com/file/d/1mHNF4eI2RYWhFQYiLAZvL5KWSkjWGr_m/view'
             },
             { 
                 id: 'DevwFKEFrfo', 
                 title: 'Ghost', 
                 duration: '2:04', 
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1k_hyHG6eFSILWjeFwQoUtuRHglyIpf9q'
+                audioUrl: 'https://drive.google.com/uc?export=download&id=1k_hyHG6eFSILWjeFwQoUtuRHglyIpf9q',
+                downloadUrl: 'https://drive.google.com/file/d/1k_hyHG6eFSILWjeFwQoUtuRHglyIpf9q/view'
             },
             { 
                 id: '7TQE48Wu8tQ', 
                 title: 'Toxic', 
                 duration: '2:13',
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1E04xCjuU_-Bb0AzOCzc723GAhRFkrM9O'
+                audioUrl: 'https://drive.google.com/uc?export=download&id=1E04xCjuU_-Bb0AzOCzc723GAhRFkrM9O',
+                downloadUrl: 'https://drive.google.com/file/d/1E04xCjuU_-Bb0AzOCzc723GAhRFkrM9O/view'
             },
             { 
                 id: '4iV5W9uYEdY', 
                 title: 'IDGAF', 
                 duration: '2:22',
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1ip-fiEixJeuKx1pdrfaY0aj7XzOCQhbB'
+                audioUrl: 'https://drive.google.com/uc?export=download&id=1ip-fiEixJeuKx1pdrfaY0aj7XzOCQhbB',
+                downloadUrl: 'https://drive.google.com/file/d/1ip-fiEixJeuKx1pdrfaY0aj7XzOCQhbB/view'
             },
             { 
                 id: '2O9Lz9ZgQ3m', 
                 title: 'Sick of U', 
                 duration: '2:28',
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1Rwfyj8UTWaKt5bO5CSQd2Pe-mzjMhASg'
+                audioUrl: 'https://drive.google.com/uc?export=download&id=1Rwfyj8UTWaKt5bO5CSQd2Pe-mzjMhASg',
+                downloadUrl: 'https://drive.google.com/file/d/1Rwfyj8UTWaKt5bO5CSQd2Pe-mzjMhASg/view'
             }
         ];
         
@@ -1041,6 +1079,7 @@
         
         function showMusicError() {
             const musicError = document.getElementById('musicError');
+            musicError.textContent = 'No se pudo reproducir la música. Puedes descargar la canción haciendo clic en el enlace de descarga.';
             musicError.classList.add('show');
             setTimeout(() => {
                 musicError.classList.remove('show');
@@ -1051,8 +1090,13 @@
             currentSongIndex = index;
             updatePlayerUI();
             
-            // Cargar y reproducir la canción
+            // Mostrar el contenedor del reproductor de audio
+            document.getElementById('audioPlayerContainer').style.display = 'block';
+            
+            // Cargar la canción
             audioPlayer.src = songs[index].audioUrl;
+            
+            // Intentar reproducir
             audioPlayer.play().catch(error => {
                 console.error("Error al reproducir la canción:", error);
                 showMusicError();
