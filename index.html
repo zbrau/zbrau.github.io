@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Feliz Cumpleaños Euge</title>
+    <title>¡Feliz Cumpleaños Eug</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -103,18 +103,6 @@
         
         .error-message.show {
             opacity: 1;
-        }
-        
-        .countdown {
-            font-size: 14px;
-            color: #a78bfa;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(138, 43, 226, 0.1);
-            border-radius: 8px;
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            font-weight: 500;
-            line-height: 1.5;
         }
         
         .particles {
@@ -496,6 +484,14 @@
             box-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
         }
         
+        .youtube-player {
+            position: fixed;
+            top: -1000px;
+            left: -1000px;
+            width: 1px;
+            height: 1px;
+        }
+        
         .container {
             position: relative;
             z-index: 10;
@@ -582,160 +578,9 @@
             color: #1db954;
             margin-right: 8px;
         }
-        
-        /* Playlist de canciones */
-        .playlist-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
-        }
-        
-        .playlist-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #8a2be2;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
-        }
-        
-        .playlist-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            margin-bottom: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .playlist-item:hover {
-            background: rgba(138, 43, 226, 0.2);
-            transform: translateX(5px);
-        }
-        
-        .playlist-item.active {
-            background: rgba(138, 43, 226, 0.3);
-            border-left: 3px solid #8a2be2;
-        }
-        
-        .playlist-album {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-right: 15px;
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
-            background: #1a1a2e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .playlist-album img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .playlist-album i {
-            font-size: 24px;
-            color: #8a2be2;
-        }
-        
-        .playlist-number {
-            width: 30px;
-            height: 30px;
-            background: rgba(138, 43, 226, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            margin-right: 15px;
-        }
-        
-        .playlist-info {
-            flex-grow: 1;
-            text-align: left;
-        }
-        
-        .playlist-song {
-            font-size: 16px;
-            font-weight: 500;
-            color: #fff;
-        }
-        
-        .playlist-artist {
-            font-size: 14px;
-            color: #a78bfa;
-        }
-        
-        .playlist-duration {
-            font-size: 14px;
-            color: #a78bfa;
-            margin-left: 10px;
-        }
-        
-        /* Mensaje de error de música */
-        .music-error {
-            position: fixed;
-            bottom: 130px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 59, 48, 0.9);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            z-index: 200;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.5);
-        }
-        
-        .music-error.show {
-            opacity: 1;
-        }
-        
-        /* Reproductor de audio visible */
-        .audio-player-container {
-            margin-top: 10px;
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px;
-        }
-        
-        .audio-player-container audio {
-            width: 100%;
-            border-radius: 5px;
-        }
-        
-        /* Botón de descarga */
-        .download-btn {
-            display: inline-block;
-            margin-left: 10px;
-            padding: 5px 10px;
-            background: rgba(30, 215, 96, 0.2);
-            color: #1db954;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .download-btn:hover {
-            background: rgba(30, 215, 96, 0.3);
-            transform: scale(1.05);
-        }
     </style>
 </head>
-<body>
+<body class="gradient-bg min-h-screen flex flex-col items-center justify-center text-white p-4">
     <!-- Pantalla de acceso -->
     <div class="access-screen" id="accessScreen">
         <div class="access-container">
@@ -744,11 +589,9 @@
             <input type="password" class="password-input" id="passwordInput" placeholder="Ingresa la contraseña">
             <button class="access-btn" onclick="checkAccess()">Entrar</button>
             <p class="error-message" id="errorMessage">Contraseña incorrecta</p>
-            <div class="countdown" id="countdown">Cargando contador...</div>
         </div>
     </div>
     
-    <!-- Contenido principal -->
     <div class="particles" id="particles"></div>
     <div class="waves"></div>
     
@@ -789,74 +632,11 @@
                 <p class="instruction">Haz clic en el ukelele para un efecto especial</p>
                 
                 <div class="glass-effect message-container p-6 rounded-xl neon-border mb-6">
-                    <h2 class="text-2xl md:text-3xl font-semibold mb-4">¡Hola Euge!</h2>
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-4">¡Hola Eugue!</h2>
                     <p class="text-lg mb-4">Feliz cumpleaños espero q te las pases bien en tu día especial.</p>
                     <p class="text-lg mb-4">Sabes k tequiero y que en muy poco tiempo te convertiste en una persona muy especial para mí.</p>
                     <p class="text-lg mb-4">Eres una niña muy graciosa y me caes muy bien.</p>
                     <p class="text-lg">Tekiero muchísimo y feliz cumpleaños amika.</p>
-                </div>
-                
-                <!-- Playlist de canciones -->
-                <div class="playlist-section">
-                    <h3 class="playlist-title">
-                        <i class="fab fa-spotify spotify-icon"></i>
-                        Playlist Especial - BoyWithUke
-                    </h3>
-                    <div class="playlist-item active" onclick="playSong(0)">
-                        <div class="playlist-album">
-                            <img src="https://img.youtube.com/vi/2tUBqZG2Ab/mqdefault.jpg" alt="Long Drives">
-                        </div>
-                        <div class="playlist-number">1</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">Long Drives</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:31</div>
-                    </div>
-                    <div class="playlist-item" onclick="playSong(1)">
-                        <div class="playlist-album">
-                            <img src="https://img.youtube.com/vi/DevwFKEFrfo/mqdefault.jpg" alt="Ghost">
-                        </div>
-                        <div class="playlist-number">2</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">Ghost</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:04</div>
-                    </div>
-                    <div class="playlist-item" onclick="playSong(2)">
-                        <div class="playlist-album">
-                            <img src="https://img.youtube.com/vi/7TQE48Wu8tQ/mqdefault.jpg" alt="Toxic">
-                        </div>
-                        <div class="playlist-number">3</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">Toxic</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:13</div>
-                    </div>
-                    <div class="playlist-item" onclick="playSong(3)">
-                        <div class="playlist-album">
-                            <img src="https://img.youtube.com/vi/4iV5W9uYEdY/mqdefault.jpg" alt="IDGAF">
-                        </div>
-                        <div class="playlist-number">4</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">IDGAF</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:22</div>
-                    </div>
-                    <div class="playlist-item" onclick="playSong(4)">
-                        <div class="playlist-album">
-                            <img src="https://img.youtube.com/vi/2O9Lz9ZgQ3m/mqdefault.jpg" alt="Sick of U">
-                        </div>
-                        <div class="playlist-number">5</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">Sick of U</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:28</div>
-                    </div>
                 </div>
                 
                 <!-- Sección del código de Spotify -->
@@ -882,30 +662,20 @@
     
     <div id="musicNotesContainer"></div>
     <div id="confettiContainer"></div>
-    
-    <!-- Mensaje de error de música -->
-    <div class="music-error" id="musicError">
-        No se pudo reproducir la música. Por favor, intenta más tarde.
-    </div>
+    <div id="youtubePlayer" class="youtube-player"></div>
     
     <div class="music-player">
         <div class="player-container">
             <div class="player-image">
-                <img src="https://img.youtube.com/vi/2tUBqZG2Ab/mqdefault.jpg" alt="Long Drives" id="playerAlbumArt">
+                <img src="https://img.youtube.com/vi/DevwFKEFrfo/default.jpg" alt="Ghost">
             </div>
             <div class="player-info">
-                <div class="song-title" id="playerSongTitle">Long Drives</div>
-                <div class="artist-name" id="playerArtistName">BoyWithUke</div>
+                <div class="song-title">Ghost</div>
+                <div class="artist-name">BoyWithUke</div>
             </div>
             <div class="player-controls">
-                <button class="control-btn" onclick="previousSong()">
-                    <i class="fas fa-backward"></i>
-                </button>
-                <button class="control-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                <button class="control-btn" id="playPauseBtn">
                     <i class="fas fa-play" id="playPauseIcon"></i>
-                </button>
-                <button class="control-btn" onclick="nextSong()">
-                    <i class="fas fa-forward"></i>
                 </button>
                 <div class="volume-control">
                     <i class="fas fa-volume-up volume-icon"></i>
@@ -913,120 +683,25 @@
                 </div>
             </div>
         </div>
-        <!-- Reproductor de audio visible -->
-        <div class="audio-player-container" id="audioPlayerContainer" style="display: none;">
-            <audio id="audioPlayer" controls></audio>
-        </div>
     </div>
     
     <script>
-        // Configuración de canciones con URLs de descarga directa de Google Drive
-        const songs = [
-            { 
-                id: '2tUBqZG2Ab', 
-                title: 'Long Drives', 
-                duration: '2:31',
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1mHNF4eI2RYWhFQYiLAZvL5KWSkjWGr_m',
-                downloadUrl: 'https://drive.google.com/file/d/1mHNF4eI2RYWhFQYiLAZvL5KWSkjWGr_m/view'
-            },
-            { 
-                id: 'DevwFKEFrfo', 
-                title: 'Ghost', 
-                duration: '2:04', 
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1k_hyHG6eFSILWjeFwQoUtuRHglyIpf9q',
-                downloadUrl: 'https://drive.google.com/file/d/1k_hyHG6eFSILWjeFwQoUtuRHglyIpf9q/view'
-            },
-            { 
-                id: '7TQE48Wu8tQ', 
-                title: 'Toxic', 
-                duration: '2:13',
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1E04xCjuU_-Bb0AzOCzc723GAhRFkrM9O',
-                downloadUrl: 'https://drive.google.com/file/d/1E04xCjuU_-Bb0AzOCzc723GAhRFkrM9O/view'
-            },
-            { 
-                id: '4iV5W9uYEdY', 
-                title: 'IDGAF', 
-                duration: '2:22',
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1ip-fiEixJeuKx1pdrfaY0aj7XzOCQhbB',
-                downloadUrl: 'https://drive.google.com/file/d/1ip-fiEixJeuKx1pdrfaY0aj7XzOCQhbB/view'
-            },
-            { 
-                id: '2O9Lz9ZgQ3m', 
-                title: 'Sick of U', 
-                duration: '2:28',
-                audioUrl: 'https://drive.google.com/uc?export=download&id=1Rwfyj8UTWaKt5bO5CSQd2Pe-mzjMhASg',
-                downloadUrl: 'https://drive.google.com/file/d/1Rwfyj8UTWaKt5bO5CSQd2Pe-mzjMhASg/view'
-            }
-        ];
-        
-        let currentSongIndex = 0;
-        let isPlaying = false;
-        const audioPlayer = document.getElementById('audioPlayer');
-        
         // Sistema de acceso
         const correctPassword = 'euge2024';
-        const targetDate = new Date('2024-09-01');
-        
-        // Inicializar el contador al cargar la página
-        window.addEventListener('load', function() {
-            console.log("Página cargada");
-            updateCountdown();
-            // Actualizar cada segundo para mayor precisión
-            setInterval(updateCountdown, 1000);
-        });
         
         function checkAccess() {
             const password = document.getElementById('passwordInput').value;
             const errorMessage = document.getElementById('errorMessage');
             
-            const today = new Date();
-            
-            // Validar que se ingrese una contraseña
-            if (!password) {
-                errorMessage.textContent = 'Por favor ingresa una contraseña';
-                errorMessage.classList.add('show');
-                setTimeout(() => {
-                    errorMessage.classList.remove('show');
-                }, 3000);
-                return;
-            }
-            
-            if (today >= targetDate) {
-                // Si es 1 de septiembre o después, permitir acceso sin contraseña
-                grantAccess();
-            } else if (password === correctPassword) {
-                // Contraseña correcta
-                grantAccess();
+            if (password === correctPassword) {
+                document.getElementById('accessScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
             } else {
-                // Contraseña incorrecta
                 errorMessage.textContent = 'Contraseña incorrecta';
                 errorMessage.classList.add('show');
                 setTimeout(() => {
                     errorMessage.classList.remove('show');
                 }, 3000);
-            }
-        }
-        
-        function grantAccess() {
-            document.getElementById('accessScreen').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-            initializePlayer();
-        }
-        
-        function updateCountdown() {
-            const today = new Date();
-            const countdown = document.getElementById('countdown');
-            
-            if (today < targetDate) {
-                const timeLeft = targetDate - today;
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                countdown.innerHTML = `La sorpresa se revelará en:<br>${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos`;
-            } else {
-                countdown.innerHTML = '¡La sorpresa está disponible!<br>Ingresa la contraseña para acceder.';
             }
         }
         
@@ -1051,115 +726,86 @@
             }
         }
         
-        function initializePlayer() {
-            createParticles();
-            
-            // Configurar eventos del reproductor de audio
-            audioPlayer.addEventListener('play', function() {
-                isPlaying = true;
-                document.getElementById('playPauseIcon').className = 'fas fa-pause';
-            });
-            
-            audioPlayer.addEventListener('pause', function() {
-                isPlaying = false;
-                document.getElementById('playPauseIcon').className = 'fas fa-play';
-            });
-            
-            audioPlayer.addEventListener('ended', function() {
-                nextSong();
-            });
-            
-            audioPlayer.addEventListener('error', function() {
-                showMusicError();
-            });
-            
-            // Configurar volumen inicial
-            audioPlayer.volume = 0.3;
-        }
+        window.addEventListener('load', createParticles);
         
-        function showMusicError() {
-            const musicError = document.getElementById('musicError');
-            musicError.textContent = 'No se pudo reproducir la música. Puedes descargar la canción haciendo clic en el enlace de descarga.';
-            musicError.classList.add('show');
-            setTimeout(() => {
-                musicError.classList.remove('show');
-            }, 5000);
-        }
+        let player;
+        let isPlaying = false;
         
-        function playSong(index) {
-            currentSongIndex = index;
-            updatePlayerUI();
-            
-            // Mostrar el contenedor del reproductor de audio
-            document.getElementById('audioPlayerContainer').style.display = 'block';
-            
-            // Cargar la canción
-            audioPlayer.src = songs[index].audioUrl;
-            
-            // Intentar reproducir
-            audioPlayer.play().catch(error => {
-                console.error("Error al reproducir la canción:", error);
-                showMusicError();
-            });
-            
-            // Actualizar playlist visual
-            document.querySelectorAll('.playlist-item').forEach((item, i) => {
-                if (i === index) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtubePlayer', {
+                height: '1',
+                width: '1',
+                videoId: 'DevwFKEFrfo',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'DevwFKEFrfo',
+                    'mute': 0,
+                    'start': 20
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
                 }
             });
         }
         
-        function updatePlayerUI() {
-            const song = songs[currentSongIndex];
-            document.getElementById('playerSongTitle').textContent = song.title;
-            document.getElementById('playerArtistName').textContent = 'BoyWithUke';
-            // Usar imagen de YouTube
-            document.getElementById('playerAlbumArt').src = `https://img.youtube.com/vi/${song.id}/mqdefault.jpg`;
+        function onPlayerReady(event) {
+            player.setVolume(30);
         }
         
-        function togglePlayPause() {
-            if (isPlaying) {
-                audioPlayer.pause();
-            } else {
-                audioPlayer.play().catch(error => {
-                    console.error("Error al reproducir la canción:", error);
-                    showMusicError();
-                });
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                document.getElementById('playPauseIcon').className = 'fas fa-pause';
+            } else if (event.data == YT.PlayerState.PAUSED) {
+                isPlaying = false;
+                document.getElementById('playPauseIcon').className = 'fas fa-play';
+            } else if (event.data == YT.PlayerState.ENDED) {
+                player.seekTo(20);
+                player.playVideo();
             }
         }
         
-        function previousSong() {
-            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-            playSong(currentSongIndex);
-        }
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playPauseIcon = document.getElementById('playPauseIcon');
         
-        function nextSong() {
-            currentSongIndex = (currentSongIndex + 1) % songs.length;
-            playSong(currentSongIndex);
-        }
+        playPauseBtn.addEventListener('click', function() {
+            if (player) {
+                if (isPlaying) {
+                    player.pauseVideo();
+                } else {
+                    if (player.getCurrentTime() >= player.getDuration() - 1) {
+                        player.seekTo(20);
+                    }
+                    player.playVideo();
+                }
+            }
+        });
         
-        // Control de volumen
         const volumeSlider = document.getElementById('volumeSlider');
         const volumeIcon = document.querySelector('.volume-icon');
         
         volumeSlider.addEventListener('input', function() {
-            const volume = this.value / 100;
-            audioPlayer.volume = volume;
-            
-            // Actualizar icono de volumen
-            if (this.value == 0) {
-                volumeIcon.className = 'fas fa-volume-mute volume-icon';
-            } else if (this.value < 50) {
-                volumeIcon.className = 'fas fa-volume-down volume-icon';
-            } else {
-                volumeIcon.className = 'fas fa-volume-up volume-icon';
+            if (player) {
+                player.setVolume(this.value);
+                
+                if (this.value == 0) {
+                    volumeIcon.className = 'fas fa-volume-mute volume-icon';
+                } else if (this.value < 50) {
+                    volumeIcon.className = 'fas fa-volume-down volume-icon';
+                } else {
+                    volumeIcon.className = 'fas fa-volume-up volume-icon';
+                }
             }
         });
         
-        // Efecto ukelele
         document.getElementById('ukelele').addEventListener('click', function() {
             createMusicNotes();
             createConfetti();
@@ -1212,7 +858,6 @@
             }
         }
         
-        // Notas musicales periódicas
         setInterval(() => {
             if (Math.random() > 0.7 && document.getElementById('mainContent').style.display !== 'none') {
                 const container = document.getElementById('musicNotesContainer');
