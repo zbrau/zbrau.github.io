@@ -689,15 +689,25 @@
             margin-left: 10px;
         }
         
-        /* Reproductor de audio alternativo */
-        .audio-player {
-            width: 100%;
-            margin-top: 10px;
+        /* Mensaje de error de música */
+        .music-error {
+            position: fixed;
+            bottom: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 59, 48, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 200;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.5);
         }
         
-        .audio-player audio {
-            width: 100%;
-            height: 40px;
+        .music-error.show {
+            opacity: 1;
         }
     </style>
 </head>
@@ -770,7 +780,7 @@
                     </h3>
                     <div class="playlist-item active" onclick="playSong(0)">
                         <div class="playlist-album">
-                            <i class="fas fa-music"></i>
+                            <img src="https://img.youtube.com/vi/2tUBqZG2A/mqdefault.jpg" alt="Long Drives">
                         </div>
                         <div class="playlist-number">1</div>
                         <div class="playlist-info">
@@ -781,7 +791,7 @@
                     </div>
                     <div class="playlist-item" onclick="playSong(1)">
                         <div class="playlist-album">
-                            <i class="fas fa-music"></i>
+                            <img src="https://img.youtube.com/vi/DevwFKEFrfo/mqdefault.jpg" alt="Ghost">
                         </div>
                         <div class="playlist-number">2</div>
                         <div class="playlist-info">
@@ -792,7 +802,7 @@
                     </div>
                     <div class="playlist-item" onclick="playSong(2)">
                         <div class="playlist-album">
-                            <i class="fas fa-music"></i>
+                            <img src="https://img.youtube.com/vi/7TQE48Wu8tQ/mqdefault.jpg" alt="Toxic">
                         </div>
                         <div class="playlist-number">3</div>
                         <div class="playlist-info">
@@ -803,7 +813,7 @@
                     </div>
                     <div class="playlist-item" onclick="playSong(3)">
                         <div class="playlist-album">
-                            <i class="fas fa-music"></i>
+                            <img src="https://img.youtube.com/vi/4iV5W9uYEdY/mqdefault.jpg" alt="IDGAF">
                         </div>
                         <div class="playlist-number">4</div>
                         <div class="playlist-info">
@@ -814,7 +824,7 @@
                     </div>
                     <div class="playlist-item" onclick="playSong(4)">
                         <div class="playlist-album">
-                            <i class="fas fa-music"></i>
+                            <img src="https://img.youtube.com/vi/2O9Lz9ZgQ3m/mqdefault.jpg" alt="Sick of U">
                         </div>
                         <div class="playlist-number">5</div>
                         <div class="playlist-info">
@@ -850,11 +860,15 @@
     <div id="confettiContainer"></div>
     <div id="youtubePlayer" class="youtubePlayer"></div>
     
-    <!-- Reproductor de audio alternativo -->
+    <!-- Mensaje de error de música -->
+    <div class="music-error" id="musicError">
+        No se pudo reproducir la música. Por favor, intenta más tarde.
+    </div>
+    
     <div class="music-player">
         <div class="player-container">
             <div class="player-image">
-                <img src="https://i.imgur.com/pcof38i.png" alt="Long Drives" id="playerAlbumArt">
+                <img src="https://img.youtube.com/vi/2tUBqZG2A/mqdefault.jpg" alt="Long Drives" id="playerAlbumArt">
             </div>
             <div class="player-info">
                 <div class="song-title" id="playerSongTitle">Long Drives</div>
@@ -876,53 +890,23 @@
                 </div>
             </div>
         </div>
-        <!-- Reproductor de audio HTML5 como alternativa -->
-        <div class="audio-player" id="audioPlayerContainer" style="display: none;">
-            <audio id="audioElement" controls></audio>
-        </div>
     </div>
     
     <script>
-        // Configuración de canciones
+        // Configuración de canciones con IDs correctos de YouTube
         const songs = [
-            { 
-                id: '2tUBqZG2A', 
-                title: 'Long Drives', 
-                duration: '2:31',
-                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' // Audio de respaldo
-            },
-            { 
-                id: 'DevwFKEFrfo', 
-                title: 'Ghost', 
-                duration: '2:04', 
-                start: 20,
-                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' // Audio de respaldo
-            },
-            { 
-                id: '7TQE48Wu8tQ', 
-                title: 'Toxic', 
-                duration: '2:13',
-                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' // Audio de respaldo
-            },
-            { 
-                id: '4iV5W9uYEdY', 
-                title: 'IDGAF', 
-                duration: '2:22',
-                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3' // Audio de respaldo
-            },
-            { 
-                id: '2O9Lz9ZgQ3m', 
-                title: 'Sick of U', 
-                duration: '2:28',
-                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3' // Audio de respaldo
-            }
+            { id: '2tUBqZG2A', title: 'Long Drives', duration: '2:31' },
+            { id: 'DevwFKEFrfo', title: 'Ghost', duration: '2:04', start: 20 },
+            { id: '7TQE48Wu8tQ', title: 'Toxic', duration: '2:13' },
+            { id: '4iV5W9uYEdY', title: 'IDGAF', duration: '2:22' },
+            { id: '2O9Lz9ZgQ3m', title: 'Sick of U', duration: '2:28' }
         ];
         
         let currentSongIndex = 0;
         let player;
         let isPlaying = false;
         let youtubeAPIReady = false;
-        let useAudioPlayer = false; // Usar reproductor de audio HTML5 como alternativa
+        let playerReady = false;
         
         // Sistema de acceso
         const correctPassword = 'euge2024';
@@ -1015,49 +999,18 @@
         function initializePlayer() {
             createParticles();
             
-            // Intentar cargar la API de YouTube
-            try {
-                if (typeof YT === 'undefined') {
-                    console.log("Cargando API de YouTube");
-                    const tag = document.createElement('script');
-                    tag.src = "https://www.youtube.com/iframe_api";
-                    const firstScriptTag = document.getElementsByTagName('script')[0];
-                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-                } else {
-                    console.log("API de YouTube ya está cargada");
-                    youtubeAPIReady = true;
-                    createYouTubePlayer();
-                }
-            } catch (error) {
-                console.error("Error al cargar API de YouTube:", error);
-                // Usar reproductor de audio HTML5 como alternativa
-                useAudioPlayer = true;
-                initializeAudioPlayer();
+            // Cargar la API de YouTube si no se ha cargado aún
+            if (typeof YT === 'undefined') {
+                console.log("Cargando API de YouTube");
+                const tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                const firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            } else {
+                console.log("API de YouTube ya está cargada");
+                youtubeAPIReady = true;
+                createYouTubePlayer();
             }
-        }
-        
-        function initializeAudioPlayer() {
-            console.log("Inicializando reproductor de audio HTML5");
-            document.getElementById('audioPlayerContainer').style.display = 'block';
-            const audioElement = document.getElementById('audioElement');
-            audioElement.src = songs[currentSongIndex].audioUrl;
-            
-            audioElement.addEventListener('play', function() {
-                isPlaying = true;
-                document.getElementById('playPauseIcon').className = 'fas fa-pause';
-            });
-            
-            audioElement.addEventListener('pause', function() {
-                isPlaying = false;
-                document.getElementById('playPauseIcon').className = 'fas fa-play';
-            });
-            
-            audioElement.addEventListener('ended', function() {
-                nextSong();
-            });
-            
-            // Configurar volumen inicial
-            audioElement.volume = 0.3;
         }
         
         function createYouTubePlayer() {
@@ -1073,7 +1026,8 @@
                         'loop': 1,
                         'playlist': songs[currentSongIndex].id,
                         'mute': 0,
-                        'start': songs[currentSongIndex].start || 0
+                        'start': songs[currentSongIndex].start || 0,
+                        'origin': window.location.origin
                     },
                     events: {
                         'onReady': onPlayerReady,
@@ -1083,17 +1037,21 @@
                 });
             } catch (error) {
                 console.error("Error al crear reproductor de YouTube:", error);
-                // Usar reproductor de audio HTML5 como alternativa
-                useAudioPlayer = true;
-                initializeAudioPlayer();
+                showMusicError();
             }
         }
         
         function onPlayerError(event) {
             console.error("Error en el reproductor de YouTube:", event.data);
-            // Usar reproductor de audio HTML5 como alternativa
-            useAudioPlayer = true;
-            initializeAudioPlayer();
+            showMusicError();
+        }
+        
+        function showMusicError() {
+            const musicError = document.getElementById('musicError');
+            musicError.classList.add('show');
+            setTimeout(() => {
+                musicError.classList.remove('show');
+            }, 5000);
         }
         
         function onYouTubeIframeAPIReady() {
@@ -1107,6 +1065,7 @@
         
         function onPlayerReady(event) {
             console.log("Reproductor de YouTube listo");
+            playerReady = true;
             player.setVolume(30);
         }
         
@@ -1126,15 +1085,7 @@
             currentSongIndex = index;
             updatePlayerUI();
             
-            if (useAudioPlayer) {
-                // Usar reproductor de audio HTML5
-                const audioElement = document.getElementById('audioElement');
-                audioElement.src = songs[index].audioUrl;
-                if (isPlaying) {
-                    audioElement.play();
-                }
-            } else if (player && youtubeAPIReady) {
-                // Usar reproductor de YouTube
+            if (player && playerReady) {
                 try {
                     player.loadVideoById({
                         videoId: songs[index].id,
@@ -1147,10 +1098,7 @@
                     }
                 } catch (error) {
                     console.error("Error al cargar video de YouTube:", error);
-                    // Usar reproductor de audio HTML5 como alternativa
-                    useAudioPlayer = true;
-                    initializeAudioPlayer();
-                    playSong(index);
+                    showMusicError();
                 }
             }
             
@@ -1168,21 +1116,12 @@
             const song = songs[currentSongIndex];
             document.getElementById('playerSongTitle').textContent = song.title;
             document.getElementById('playerArtistName').textContent = 'BoyWithUke';
-            // Usar imagen genérica
-            document.getElementById('playerAlbumArt').src = 'https://i.imgur.com/pcof38i.png';
+            // Usar imagen de YouTube
+            document.getElementById('playerAlbumArt').src = `https://img.youtube.com/vi/${song.id}/mqdefault.jpg`;
         }
         
         function togglePlayPause() {
-            if (useAudioPlayer) {
-                // Usar reproductor de audio HTML5
-                const audioElement = document.getElementById('audioElement');
-                if (isPlaying) {
-                    audioElement.pause();
-                } else {
-                    audioElement.play();
-                }
-            } else if (player && youtubeAPIReady) {
-                // Usar reproductor de YouTube
+            if (player && playerReady) {
                 try {
                     if (isPlaying) {
                         player.pauseVideo();
@@ -1191,10 +1130,7 @@
                     }
                 } catch (error) {
                     console.error("Error al controlar reproductor de YouTube:", error);
-                    // Usar reproductor de audio HTML5 como alternativa
-                    useAudioPlayer = true;
-                    initializeAudioPlayer();
-                    togglePlayPause();
+                    showMusicError();
                 }
             }
         }
@@ -1214,14 +1150,7 @@
         const volumeIcon = document.querySelector('.volume-icon');
         
         volumeSlider.addEventListener('input', function() {
-            const volume = this.value / 100;
-            
-            if (useAudioPlayer) {
-                // Usar reproductor de audio HTML5
-                const audioElement = document.getElementById('audioElement');
-                audioElement.volume = volume;
-            } else if (player && youtubeAPIReady) {
-                // Usar reproductor de YouTube
+            if (player && playerReady) {
                 try {
                     player.setVolume(this.value);
                 } catch (error) {
