@@ -114,6 +114,7 @@
             border-radius: 8px;
             border: 1px solid rgba(138, 43, 226, 0.2);
             font-weight: 500;
+            line-height: 1.5;
         }
         
         .particles {
@@ -687,1176 +688,16 @@
             color: #a78bfa;
             margin-left: 10px;
         }
-    </style>
-</head>
-<body>
-    <!-- Pantalla de acceso -->
-    <div class="access-screen" id="accessScreen">
-        <div class="access-container">
-            <h2 class="access-title">🎂 Acceso Especial</h2>
-            <p class="access-subtitle">Esta página tiene una sorpresa especial</p>
-            <input type="password" class="password-input" id="passwordInput" placeholder="Ingresa la contraseña">
-            <button class="access-btn" onclick="checkAccess()">Entrar</button>
-            <p class="error-message" id="errorMessage">Contraseña incorrecta</p>
-            <div class="countdown" id="countdown">Cargando contador...</div>
-        </div>
-    </div>
-    
-    <!-- Contenido principal -->
-    <div class="particles" id="particles"></div>
-    <div class="waves"></div>
-    
-    <div class="decoration" style="top: 10%; left: 5%; font-size: 30px; color: #8a2be2; opacity: 0.2;">
-        <i class="fas fa-music"></i>
-    </div>
-    <div class="decoration" style="top: 20%; right: 10%; font-size: 40px; color: #ff00ff; opacity: 0.2; animation-duration: 25s;">
-        <i class="fas fa-star"></i>
-    </div>
-    <div class="decoration" style="bottom: 30%; left: 15%; font-size: 35px; color: #00ffff; opacity: 0.2; animation-duration: 30s;">
-        <i class="fas fa-heart"></i>
-    </div>
-    
-    <div class="container max-w-4xl mx-auto text-center" id="mainContent" style="display: none;">
-        <header class="mb-8">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 neon-text glow-text" data-text="¡Feliz Cumpleaños!">¡Feliz Cumpleaños!</h1>
-            
-            <div class="mask-container">
-                <div class="mask">
-                    <div class="mask-light light-left"></div>
-                    <div class="mask-light light-right"></div>
-                </div>
-            </div>
-        </header>
         
-        <main>
-            <section class="mb-12">
-                <div class="ukelele floating mb-8" id="ukelele">
-                    <div class="ukelele-body"></div>
-                    <div class="ukelele-hole"></div>
-                    <div class="ukelele-neck"></div>
-                    <div class="ukelele-head"></div>
-                    <div class="ukelele-string string-1"></div>
-                    <div class="ukelele-string string-2"></div>
-                    <div class="ukelele-string string-3"></div>
-                    <div class="ukelele-string string-4"></div>
-                </div>
-                <p class="instruction">Haz clic en el ukelele para un efecto especial</p>
-                
-                <div class="glass-effect message-container p-6 rounded-xl neon-border mb-6">
-                    <h2 class="text-2xl md:text-3xl font-semibold mb-4">¡Hola Euge!</h2>
-                    <p class="text-lg mb-4">Feliz cumpleaños espero q te las pases bien en tu día especial.</p>
-                    <p class="text-lg mb-4">Sabes k tequiero y que en muy poco tiempo te convertiste en una persona muy especial para mí.</p>
-                    <p class="text-lg mb-4">Eres una niña muy graciosa y me caes muy bien.</p>
-                    <p class="text-lg">Tekiero muchísimo y feliz cumpleaños amika.</p>
-                </div>
-                
-                <!-- Playlist de canciones -->
-                <div class="playlist-section">
-                    <h3 class="playlist-title">
-                        <i class="fab fa-spotify spotify-icon"></i>
-                        Playlist Especial - BoyWithUke
-                    </h3>
-                    <div class="playlist-item active" onclick="playSong(0)">
-                        <div class="playlist-album">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <div class="playlist-number">1</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">Long Drives</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:31</div>
-                    </div>
-                    <div class="playlist-item" onclick="playSong(1)">
-                        <div class="playlist-album">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <div class="playlist-number">2</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">Ghost</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:04</div>
-                    </div>
-                    <div class="playlist-item" onclick="playSong(2)">
-                        <div class="playlist-album">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <div class="playlist-number">3</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">Toxic</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:13</div>
-                    </div>
-                    <div class="playlist-item" onclick="playSong(3)">
-                        <div class="playlist-album">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <div class="playlist-number">4</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">IDGAF</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:22</div>
-                    </div>
-                    <div class="playlist-item" onclick="playSong(4)">
-                        <div class="playlist-album">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <div class="playlist-number">5</div>
-                        <div class="playlist-info">
-                            <div class="playlist-song">Sick of U</div>
-                            <div class="playlist-artist">BoyWithUke</div>
-                        </div>
-                        <div class="playlist-duration">2:28</div>
-                    </div>
-                </div>
-                
-                <!-- Sección del código de Spotify -->
-                <div class="spotify-section">
-                    <h3 class="spotify-title">
-                        <i class="fab fa-spotify spotify-icon"></i>
-                        escanealo desde spotify
-                    </h3>
-                    <div class="spotify-code">
-                        <img src="https://i.imgur.com/pcof38i.png" alt="Código Spotify - Long Drives">
-                    </div>
-                    <p class="spotify-subtitle">I wish you weren't so far from me</p>
-                </div>
-                
-                <div class="flex justify-center space-x-4 mt-6">
-                    <i class="fas fa-heart text-pink-500 text-2xl pulse"></i>
-                    <i class="fas fa-heart text-purple-500 text-2xl pulse" style="animation-delay: 0.5s;"></i>
-                    <i class="fas fa-heart text-blue-500 text-2xl pulse" style="animation-delay: 1s;"></i>
-                </div>
-            </section>
-        </main>
-    </div>
-    
-    <div id="musicNotesContainer"></div>
-    <div id="confettiContainer"></div>
-    <div id="youtubePlayer" class="youtubePlayer"></div>
-    
-    <div class="music-player">
-        <div class="player-container">
-            <div class="player-image">
-                <img src="https://i.imgur.com/pcof38i.png" alt="Long Drives" id="playerAlbumArt">
-            </div>
-            <div class="player-info">
-                <div class="song-title" id="playerSongTitle">Long Drives</div>
-                <div class="artist-name" id="playerArtistName">BoyWithUke</div>
-            </div>
-            <div class="player-controls">
-                <button class="control-btn" onclick="previousSong()">
-                    <i class="fas fa-backward"></i>
-                </button>
-                <button class="control-btn" id="playPauseBtn" onclick="togglePlayPause()">
-                    <i class="fas fa-play" id="playPauseIcon"></i>
-                </button>
-                <button class="control-btn" onclick="nextSong()">
-                    <i class="fas fa-forward"></i>
-                </button>
-                <div class="volume-control">
-                    <i class="fas fa-volume-up volume-icon"></i>
-                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        // Configuración de canciones con IDs correctos de YouTube
-        const songs = [
-            { id: '2tUBqZG2A', title: 'Long Drives', duration: '2:31' },
-            { id: 'DevwFKEFrfo', title: 'Ghost', duration: '2:04', start: 20 },
-            { id: '7TQE48Wu8tQ', title: 'Toxic', duration: '2:13' },
-            { id: '4iV5W9uYEdY', title: 'IDGAF', duration: '2:22' },
-            { id: '2O9Lz9ZgQ3m', title: 'Sick of U', duration: '2:28' }
-        ];
-        
-        let currentSongIndex = 0;
-        let player;
-        let isPlaying = false;
-        let youtubeAPIReady = false;
-        
-        // Sistema de acceso
-        const correctPassword = 'euge2024';
-        const targetDate = new Date('2024-09-01');
-        
-        // Inicializar el contador al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCountdown();
-            // Actualizar cada segundo para mayor precisión
-            setInterval(updateCountdown, 1000);
-        });
-        
-        function checkAccess() {
-            const password = document.getElementById('passwordInput').value;
-            const errorMessage = document.getElementById('errorMessage');
-            
-            const today = new Date();
-            
-            // Validar que se ingrese una contraseña
-            if (!password) {
-                errorMessage.textContent = 'Por favor ingresa una contraseña';
-                errorMessage.classList.add('show');
-                setTimeout(() => {
-                    errorMessage.classList.remove('show');
-                }, 3000);
-                return;
-            }
-            
-            if (today >= targetDate) {
-                // Si es 1 de septiembre o después, permitir acceso sin contraseña
-                grantAccess();
-            } else if (password === correctPassword) {
-                // Contraseña correcta
-                grantAccess();
-            } else {
-                // Contraseña incorrecta
-                errorMessage.textContent = 'Contraseña incorrecta';
-                errorMessage.classList.add('show');
-                setTimeout(() => {
-                    errorMessage.classList.remove('show');
-                }, 3000);
-            }
-        }
-        
-        function grantAccess() {
-            document.getElementById('accessScreen').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-            initializePlayer();
-        }
-        
-        function updateCountdown() {
-            const today = new Date();
-            const countdown = document.getElementById('countdown');
-            
-            if (today < targetDate) {
-                const timeLeft = targetDate - today;
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                countdown.innerHTML = `La sorpresa se revelará en: <br>${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos`;
-            } else {
-                countdown.innerHTML = '¡La sorpresa está disponible! Ingresa la contraseña para acceder.';
-            }
-        }
-        
-        // Permitir acceso con Enter
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkAccess();
-            }
-        });
-        
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        function initializePlayer() {
-            createParticles();
-            
-            // Cargar la API de YouTube si no se ha cargado aún
-            if (!youtubeAPIReady) {
-                const tag = document.createElement('script');
-                tag.src = "https://www.youtube.com/iframe_api";
-                const firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-            } else {
-                // Si la API ya está lista, crear el reproductor directamente
-                createYouTubePlayer();
-            }
-        }
-        
-        function createYouTubePlayer() {
-            player = new YT.Player('youtubePlayer', {
-                height: '1',
-                width: '1',
-                videoId: songs[currentSongIndex].id,
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': songs[currentSongIndex].id,
-                    'mute': 0,
-                    'start': songs[currentSongIndex].start || 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-        
-        function onYouTubeIframeAPIReady() {
-            youtubeAPIReady = true;
-            // Si el usuario ya ha accedido, crear el reproductor
-            if (document.getElementById('mainContent').style.display !== 'none') {
-                createYouTubePlayer();
-            }
-        }
-        
-        function onPlayerReady(event) {
-            player.setVolume(30);
-        }
-        
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.PLAYING) {
-                isPlaying = true;
-                document.getElementById('playPauseIcon').className = 'fas fa-pause';
-            } else if (event.data == YT.PlayerState.PAUSED) {
-                isPlaying = false;
-                document.getElementById('playPauseIcon').className = 'fas fa-play';
-            } else if (event.data == YT.PlayerState.ENDED) {
-                nextSong();
-            }
-        }
-        
-        function playSong(index) {
-            currentSongIndex = index;
-            updatePlayerUI();
-            
-            if (player && youtubeAPIReady) {
-                player.loadVideoById({
-                    videoId: songs[index].id,
-                    startSeconds: songs[index].start || 0,
-                    suggestedQuality: 'small'
-                });
-                
-                if (isPlaying) {
-                    player.playVideo();
-                }
-            }
-            
-            // Actualizar playlist visual
-            document.querySelectorAll('.playlist-item').forEach((item, i) => {
-                if (i === index) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-        }
-        
-        function updatePlayerUI() {
-            const song = songs[currentSongIndex];
-            document.getElementById('playerSongTitle').textContent = song.title;
-            document.getElementById('playerArtistName').textContent = 'BoyWithUke';
-            // Usar imagen genérica en lugar de YouTube
-            document.getElementById('playerAlbumArt').src = 'https://i.imgur.com/pcof38i.png';
-        }
-        
-        function togglePlayPause() {
-            if (player && youtubeAPIReady) {
-                if (isPlaying) {
-                    player.pauseVideo();
-                } else {
-                    player.playVideo();
-                }
-            }
-        }
-        
-        function previousSong() {
-            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-            playSong(currentSongIndex);
-        }
-        
-        function nextSong() {
-            currentSongIndex = (currentSongIndex + 1) % songs.length;
-            playSong(currentSongIndex);
-        }
-        
-        // Control de volumen
-        const volumeSlider = document.getElementById('volumeSlider');
-        const volumeIcon = document.querySelector('.volume-icon');
-        
-        volumeSlider.addEventListener('input', function() {
-            if (player && youtubeAPIReady) {
-                player.setVolume(this.value);
-                
-                if (this.value == 0) {
-                    volumeIcon.className = 'fas fa-volume-mute volume-icon';
-                } else if (this.value < 50) {
-                    volumeIcon.className = 'fas fa-volume-down volume-icon';
-                } else {
-                    volumeIcon.className = 'fas fa-volume-up volume-icon';
-                }
-            }
-        });
-        
-        // Efecto ukelele
-        document.getElementById('ukelele').addEventListener('click', function() {
-            createMusicNotes();
-            createConfetti();
-            
-            this.style.animation = 'none';
-            setTimeout(() => {
-                this.style.animation = 'floating 3s ease-in-out infinite';
-            }, 10);
-        });
-        
-        function createMusicNotes() {
-            const container = document.getElementById('musicNotesContainer');
-            const notes = ['♪', '♫', '♬', '♩', '♭', '♯'];
-            
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    const note = document.createElement('div');
-                    note.className = 'music-note';
-                    note.textContent = notes[Math.floor(Math.random() * notes.length)];
-                    note.style.left = Math.random() * 100 + '%';
-                    note.style.animationDelay = Math.random() * 2 + 's';
-                    note.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                    container.appendChild(note);
-                    
-                    setTimeout(() => {
-                        note.remove();
-                    }, 5000);
-                }, i * 100);
-            }
-        }
-        
-        function createConfetti() {
-            const container = document.getElementById('confettiContainer');
-            const colors = ['#8a2be2', '#ff00ff', '#00ffff', '#ffff00', '#ff7700'];
-            
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const confettiPiece = document.createElement('div');
-                    confettiPiece.className = 'confetti';
-                    confettiPiece.style.left = Math.random() * 100 + '%';
-                    confettiPiece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confettiPiece.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                    confettiPiece.style.animation = 'confetti-fall linear forwards';
-                    container.appendChild(confettiPiece);
-                    
-                    setTimeout(() => {
-                        confettiPiece.remove();
-                    }, 5000);
-                }, i * 50);
-            }
-        }
-        
-        // Notas musicales periódicas
-        setInterval(() => {
-            if (Math.random() > 0.7 && document.getElementById('mainContent').style.display !== 'none') {
-                const container = document.getElementById('musicNotesContainer');
-                const note = document.createElement('div');
-                note.className = 'music-note';
-                note.textContent = ['♪', '♫', '♬', '♩', '♭', '♯'][Math.floor(Math.random() * 6)];
-                note.style.left = Math.random() * 100 + '%';
-                note.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                container.appendChild(note);
-                
-                setTimeout(() => {
-                    note.remove();
-                }, 5000);
-            }
-        }, 2000);
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Feliz Cumpleaños Euge</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0f0f1e;
-            overflow-x: hidden;
-            padding-bottom: 120px;
-            position: relative;
-        }
-        
-        /* Pantalla de acceso */
-        .access-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Reproductor de audio alternativo */
+        .audio-player {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        
-        .access-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            max-width: 400px;
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
-        }
-        
-        .access-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
-        }
-        
-        .access-subtitle {
-            font-size: 16px;
-            color: #a78bfa;
-            margin-bottom: 30px;
-        }
-        
-        .password-input {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(138, 43, 226, 0.3);
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
-            margin-bottom: 20px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        
-        .password-input:focus {
-            border-color: #8a2be2;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
-        }
-        
-        .access-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #8a2be2, #6a1b9a);
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
-        }
-        
-        .access-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
-        }
-        
-        .error-message {
-            color: #ff6b6b;
-            font-size: 14px;
             margin-top: 10px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
         
-        .error-message.show {
-            opacity: 1;
-        }
-        
-        .countdown {
-            font-size: 14px;
-            color: #a78bfa;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(138, 43, 226, 0.1);
-            border-radius: 8px;
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            font-weight: 500;
-        }
-        
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .audio-player audio {
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background-color: #8a2be2;
-            border-radius: 50%;
-            opacity: 0;
-            animation: particle-float 10s linear infinite;
-        }
-        
-        @keyframes particle-float {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-        }
-        
-        .waves {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%238a2be2" fill-opacity="0.1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
-            background-size: cover;
-            z-index: 1;
-        }
-        
-        .neon-text {
-            text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 30px #8a2be2, 0 0 40px #8a2be2;
-        }
-        
-        .neon-border {
-            box-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 30px #8a2be2, 0 0 40px #8a2be2;
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .floating:hover {
-            transform: scale(1.05);
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-        }
-        
-        .glow-text {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .glow-text::before {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #8a2be2, #ff00ff, #00ffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            z-index: -1;
-            filter: blur(15px);
-            opacity: 0.7;
-        }
-        
-        .ukelele {
-            position: relative;
-            width: 200px;
-            height: 250px;
-            margin: 0 auto;
-            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
-        }
-        
-        .ukelele-body {
-            position: absolute;
-            width: 150px;
-            height: 180px;
-            background: linear-gradient(135deg, #d4a574, #e5b884);
-            border-radius: 50%;
-            top: 60px;
-            left: 25px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 0 20px rgba(138, 43, 226, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .ukelele:hover .ukelele-body {
-            background: linear-gradient(135deg, #e5b884, #f5c994);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 0 30px rgba(138, 43, 226, 0.5);
-        }
-        
-        .ukelele-hole {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle, #0f0f1e, #1a1a2e);
-            border-radius: 50%;
-            top: 90px;
-            left: 70px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-        }
-        
-        .ukelele-neck {
-            position: absolute;
-            width: 30px;
-            height: 100px;
-            background: linear-gradient(to bottom, #8b4513, #654321);
-            top: 0;
-            left: 85px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-        }
-        
-        .ukelele-head {
-            position: absolute;
-            width: 50px;
-            height: 30px;
-            background: linear-gradient(to bottom, #8b4513, #654321);
-            border-radius: 10px 10px 0 0;
-            top: -20px;
-            left: 75px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-        }
-        
-        .ukelele-string {
-            position: absolute;
-            width: 2px;
-            height: 200px;
-            background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
-            top: 10px;
-            box-shadow: 0 0 5px rgba(255,255,255,0.5);
-        }
-        
-        .string-1 { left: 92px; }
-        .string-2 { left: 97px; }
-        .string-3 { left: 102px; }
-        .string-4 { left: 107px; }
-        
-        .mask-container {
-            position: relative;
-            width: 200px;
-            height: 100px;
-            margin: 0 auto 30px;
-        }
-        
-        .mask {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #000000;
-            border-radius: 100px 100px 0 0;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        
-        .mask-light {
-            position: absolute;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            top: 35px;
-            background: radial-gradient(circle, #00d4ff, #0099cc);
-            box-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff, 0 0 60px #00d4ff, inset 0 0 10px #00d4ff;
-            animation: led-pulse 3s infinite;
-        }
-        
-        .light-left { left: 40px; }
-        .light-right { right: 40px; animation-delay: 1.5s; }
-        
-        @keyframes led-pulse {
-            0%, 100% { opacity: 1; transform: scale(1); filter: brightness(1); }
-            50% { opacity: 0.7; transform: scale(0.95); filter: brightness(1.3); }
-        }
-        
-        .decoration {
-            position: absolute;
-            opacity: 0.3;
-            animation: rotate 20s linear infinite;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .music-note {
-            position: absolute;
-            font-size: 24px;
-            color: #8a2be2;
-            animation: music-float 5s linear infinite;
-            opacity: 0;
-            text-shadow: 0 0 10px #8a2be2;
-        }
-        
-        @keyframes music-float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-300px) rotate(360deg); opacity: 0; }
-        }
-        
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            opacity: 0;
-        }
-        
-        @keyframes confetti-fall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
-        
-        .instruction {
-            font-size: 14px;
-            color: #a78bfa;
-            margin-top: 10px;
-            font-style: italic;
-            text-shadow: 0 0 5px #8a2be2;
-        }
-        
-        .music-player {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(22, 33, 62, 0.95), rgba(22, 33, 62, 0.85));
-            backdrop-filter: blur(15px);
-            border-top: 2px solid rgba(138, 43, 226, 0.5);
-            padding: 15px;
-            z-index: 100;
-            box-shadow: 0 -5px 30px rgba(138, 43, 226, 0.4);
-        }
-        
-        .player-container {
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .player-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            overflow: hidden;
-            flex-shrink: 0;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
-            animation: album-pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes album-pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(138, 43, 226, 0.7); }
-            50% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.9); }
-        }
-        
-        .player-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .player-info {
-            flex-grow: 1;
-        }
-        
-        .song-title {
-            font-weight: 600;
-            font-size: 16px;
-            color: #fff;
-            margin-bottom: 2px;
-            text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
-        }
-        
-        .artist-name {
-            font-size: 14px;
-            color: #a78bfa;
-            text-shadow: 0 0 5px rgba(138, 43, 226, 0.3);
-        }
-        
-        .player-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .control-btn {
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.8), rgba(106, 27, 154, 0.8));
-            border: none;
-            color: white;
-            width: 40px;
             height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-        }
-        
-        .control-btn:hover {
-            background: linear-gradient(135deg, rgba(138, 43, 226, 1), rgba(106, 27, 154, 1));
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(138, 43, 226, 0.8);
-        }
-        
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .volume-icon {
-            color: #a78bfa;
-            text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
-        }
-        
-        .volume-slider {
-            width: 80px;
-            height: 4px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: rgba(138, 43, 226, 0.3);
-            outline: none;
-            border-radius: 2px;
-        }
-        
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #8a2be2;
-            cursor: pointer;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
-        }
-        
-        .volume-slider::-moz-range-thumb {
-            width: 12px;
-            height: 12px;
-            background: #8a2be2;
-            cursor: pointer;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
-        }
-        
-        .youtube-player {
-            position: fixed;
-            top: -1000px;
-            left: -1000px;
-            width: 1px;
-            height: 1px;
-        }
-        
-        .container {
-            position: relative;
-            z-index: 10;
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .message-container {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .message-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(138, 43, 226, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        
-        /* Estilos para la sección del código de Spotify */
-        .spotify-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(30, 215, 96, 0.3);
-            box-shadow: 0 0 20px rgba(30, 215, 96, 0.2);
-        }
-        
-        .spotify-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1db954;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(30, 215, 96, 0.5);
-        }
-        
-        .spotify-code {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 15px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(30, 215, 96, 0.5);
-            transition: transform 0.3s ease;
-            background: #000;
-            padding: 10px;
-        }
-        
-        .spotify-code:hover {
-            transform: scale(1.05);
-        }
-        
-        .spotify-code img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 5px;
-        }
-        
-        .spotify-subtitle {
-            font-size: 16px;
-            font-style: italic;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(30, 215, 96, 0.5);
-        }
-        
-        .spotify-icon {
-            color: #1db954;
-            margin-right: 8px;
-        }
-        
-        /* Playlist de canciones */
-        .playlist-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
-        }
-        
-        .playlist-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #8a2be2;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
-        }
-        
-        .playlist-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            margin-bottom: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .playlist-item:hover {
-            background: rgba(138, 43, 226, 0.2);
-            transform: translateX(5px);
-        }
-        
-        .playlist-item.active {
-            background: rgba(138, 43, 226, 0.3);
-            border-left: 3px solid #8a2be2;
-        }
-        
-        .playlist-album {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-right: 15px;
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
-            background: #1a1a2e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .playlist-album img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .playlist-album i {
-            font-size: 24px;
-            color: #8a2be2;
-        }
-        
-        .playlist-number {
-            width: 30px;
-            height: 30px;
-            background: rgba(138, 43, 226, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            margin-right: 15px;
-        }
-        
-        .playlist-info {
-            flex-grow: 1;
-            text-align: left;
-        }
-        
-        .playlist-song {
-            font-size: 16px;
-            font-weight: 500;
-            color: #fff;
-        }
-        
-        .playlist-artist {
-            font-size: 14px;
-            color: #a78bfa;
-        }
-        
-        .playlist-duration {
-            font-size: 14px;
-            color: #a78bfa;
-            margin-left: 10px;
         }
     </style>
 </head>
@@ -2009,6 +850,7 @@
     <div id="confettiContainer"></div>
     <div id="youtubePlayer" class="youtubePlayer"></div>
     
+    <!-- Reproductor de audio alternativo -->
     <div class="music-player">
         <div class="player-container">
             <div class="player-image">
@@ -2034,29 +876,61 @@
                 </div>
             </div>
         </div>
+        <!-- Reproductor de audio HTML5 como alternativa -->
+        <div class="audio-player" id="audioPlayerContainer" style="display: none;">
+            <audio id="audioElement" controls></audio>
+        </div>
     </div>
     
     <script>
-        // Configuración de canciones con IDs correctos de YouTube
+        // Configuración de canciones
         const songs = [
-            { id: '2tUBqZG2A', title: 'Long Drives', duration: '2:31' },
-            { id: 'DevwFKEFrfo', title: 'Ghost', duration: '2:04', start: 20 },
-            { id: '7TQE48Wu8tQ', title: 'Toxic', duration: '2:13' },
-            { id: '4iV5W9uYEdY', title: 'IDGAF', duration: '2:22' },
-            { id: '2O9Lz9ZgQ3m', title: 'Sick of U', duration: '2:28' }
+            { 
+                id: '2tUBqZG2A', 
+                title: 'Long Drives', 
+                duration: '2:31',
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' // Audio de respaldo
+            },
+            { 
+                id: 'DevwFKEFrfo', 
+                title: 'Ghost', 
+                duration: '2:04', 
+                start: 20,
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' // Audio de respaldo
+            },
+            { 
+                id: '7TQE48Wu8tQ', 
+                title: 'Toxic', 
+                duration: '2:13',
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' // Audio de respaldo
+            },
+            { 
+                id: '4iV5W9uYEdY', 
+                title: 'IDGAF', 
+                duration: '2:22',
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3' // Audio de respaldo
+            },
+            { 
+                id: '2O9Lz9ZgQ3m', 
+                title: 'Sick of U', 
+                duration: '2:28',
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3' // Audio de respaldo
+            }
         ];
         
         let currentSongIndex = 0;
         let player;
         let isPlaying = false;
         let youtubeAPIReady = false;
+        let useAudioPlayer = false; // Usar reproductor de audio HTML5 como alternativa
         
         // Sistema de acceso
         const correctPassword = 'euge2024';
         const targetDate = new Date('2024-09-01');
         
         // Inicializar el contador al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('load', function() {
+            console.log("Página cargada");
             updateCountdown();
             // Actualizar cada segundo para mayor precisión
             setInterval(updateCountdown, 1000);
@@ -2111,9 +985,9 @@
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
                 
-                countdown.innerHTML = `La sorpresa se revelará en: <br>${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos`;
+                countdown.innerHTML = `La sorpresa se revelará en:<br>${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos`;
             } else {
-                countdown.innerHTML = '¡La sorpresa está disponible! Ingresa la contraseña para acceder.';
+                countdown.innerHTML = '¡La sorpresa está disponible!<br>Ingresa la contraseña para acceder.';
             }
         }
         
@@ -2141,39 +1015,89 @@
         function initializePlayer() {
             createParticles();
             
-            // Cargar la API de YouTube si no se ha cargado aún
-            if (!youtubeAPIReady) {
-                const tag = document.createElement('script');
-                tag.src = "https://www.youtube.com/iframe_api";
-                const firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-            } else {
-                // Si la API ya está lista, crear el reproductor directamente
-                createYouTubePlayer();
+            // Intentar cargar la API de YouTube
+            try {
+                if (typeof YT === 'undefined') {
+                    console.log("Cargando API de YouTube");
+                    const tag = document.createElement('script');
+                    tag.src = "https://www.youtube.com/iframe_api";
+                    const firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                } else {
+                    console.log("API de YouTube ya está cargada");
+                    youtubeAPIReady = true;
+                    createYouTubePlayer();
+                }
+            } catch (error) {
+                console.error("Error al cargar API de YouTube:", error);
+                // Usar reproductor de audio HTML5 como alternativa
+                useAudioPlayer = true;
+                initializeAudioPlayer();
             }
         }
         
-        function createYouTubePlayer() {
-            player = new YT.Player('youtubePlayer', {
-                height: '1',
-                width: '1',
-                videoId: songs[currentSongIndex].id,
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': songs[currentSongIndex].id,
-                    'mute': 0,
-                    'start': songs[currentSongIndex].start || 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
+        function initializeAudioPlayer() {
+            console.log("Inicializando reproductor de audio HTML5");
+            document.getElementById('audioPlayerContainer').style.display = 'block';
+            const audioElement = document.getElementById('audioElement');
+            audioElement.src = songs[currentSongIndex].audioUrl;
+            
+            audioElement.addEventListener('play', function() {
+                isPlaying = true;
+                document.getElementById('playPauseIcon').className = 'fas fa-pause';
             });
+            
+            audioElement.addEventListener('pause', function() {
+                isPlaying = false;
+                document.getElementById('playPauseIcon').className = 'fas fa-play';
+            });
+            
+            audioElement.addEventListener('ended', function() {
+                nextSong();
+            });
+            
+            // Configurar volumen inicial
+            audioElement.volume = 0.3;
+        }
+        
+        function createYouTubePlayer() {
+            try {
+                console.log("Creando reproductor de YouTube");
+                player = new YT.Player('youtubePlayer', {
+                    height: '1',
+                    width: '1',
+                    videoId: songs[currentSongIndex].id,
+                    playerVars: {
+                        'autoplay': 0,
+                        'controls': 0,
+                        'loop': 1,
+                        'playlist': songs[currentSongIndex].id,
+                        'mute': 0,
+                        'start': songs[currentSongIndex].start || 0
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange,
+                        'onError': onPlayerError
+                    }
+                });
+            } catch (error) {
+                console.error("Error al crear reproductor de YouTube:", error);
+                // Usar reproductor de audio HTML5 como alternativa
+                useAudioPlayer = true;
+                initializeAudioPlayer();
+            }
+        }
+        
+        function onPlayerError(event) {
+            console.error("Error en el reproductor de YouTube:", event.data);
+            // Usar reproductor de audio HTML5 como alternativa
+            useAudioPlayer = true;
+            initializeAudioPlayer();
         }
         
         function onYouTubeIframeAPIReady() {
+            console.log("API de YouTube lista");
             youtubeAPIReady = true;
             // Si el usuario ya ha accedido, crear el reproductor
             if (document.getElementById('mainContent').style.display !== 'none') {
@@ -2182,6 +1106,7 @@
         }
         
         function onPlayerReady(event) {
+            console.log("Reproductor de YouTube listo");
             player.setVolume(30);
         }
         
@@ -2201,15 +1126,31 @@
             currentSongIndex = index;
             updatePlayerUI();
             
-            if (player && youtubeAPIReady) {
-                player.loadVideoById({
-                    videoId: songs[index].id,
-                    startSeconds: songs[index].start || 0,
-                    suggestedQuality: 'small'
-                });
-                
+            if (useAudioPlayer) {
+                // Usar reproductor de audio HTML5
+                const audioElement = document.getElementById('audioElement');
+                audioElement.src = songs[index].audioUrl;
                 if (isPlaying) {
-                    player.playVideo();
+                    audioElement.play();
+                }
+            } else if (player && youtubeAPIReady) {
+                // Usar reproductor de YouTube
+                try {
+                    player.loadVideoById({
+                        videoId: songs[index].id,
+                        startSeconds: songs[index].start || 0,
+                        suggestedQuality: 'small'
+                    });
+                    
+                    if (isPlaying) {
+                        player.playVideo();
+                    }
+                } catch (error) {
+                    console.error("Error al cargar video de YouTube:", error);
+                    // Usar reproductor de audio HTML5 como alternativa
+                    useAudioPlayer = true;
+                    initializeAudioPlayer();
+                    playSong(index);
                 }
             }
             
@@ -2227,16 +1168,33 @@
             const song = songs[currentSongIndex];
             document.getElementById('playerSongTitle').textContent = song.title;
             document.getElementById('playerArtistName').textContent = 'BoyWithUke';
-            // Usar imagen genérica en lugar de YouTube
+            // Usar imagen genérica
             document.getElementById('playerAlbumArt').src = 'https://i.imgur.com/pcof38i.png';
         }
         
         function togglePlayPause() {
-            if (player && youtubeAPIReady) {
+            if (useAudioPlayer) {
+                // Usar reproductor de audio HTML5
+                const audioElement = document.getElementById('audioElement');
                 if (isPlaying) {
-                    player.pauseVideo();
+                    audioElement.pause();
                 } else {
-                    player.playVideo();
+                    audioElement.play();
+                }
+            } else if (player && youtubeAPIReady) {
+                // Usar reproductor de YouTube
+                try {
+                    if (isPlaying) {
+                        player.pauseVideo();
+                    } else {
+                        player.playVideo();
+                    }
+                } catch (error) {
+                    console.error("Error al controlar reproductor de YouTube:", error);
+                    // Usar reproductor de audio HTML5 como alternativa
+                    useAudioPlayer = true;
+                    initializeAudioPlayer();
+                    togglePlayPause();
                 }
             }
         }
@@ -2256,16 +1214,28 @@
         const volumeIcon = document.querySelector('.volume-icon');
         
         volumeSlider.addEventListener('input', function() {
-            if (player && youtubeAPIReady) {
-                player.setVolume(this.value);
-                
-                if (this.value == 0) {
-                    volumeIcon.className = 'fas fa-volume-mute volume-icon';
-                } else if (this.value < 50) {
-                    volumeIcon.className = 'fas fa-volume-down volume-icon';
-                } else {
-                    volumeIcon.className = 'fas fa-volume-up volume-icon';
+            const volume = this.value / 100;
+            
+            if (useAudioPlayer) {
+                // Usar reproductor de audio HTML5
+                const audioElement = document.getElementById('audioElement');
+                audioElement.volume = volume;
+            } else if (player && youtubeAPIReady) {
+                // Usar reproductor de YouTube
+                try {
+                    player.setVolume(this.value);
+                } catch (error) {
+                    console.error("Error al ajustar volumen de YouTube:", error);
                 }
+            }
+            
+            // Actualizar icono de volumen
+            if (this.value == 0) {
+                volumeIcon.className = 'fas fa-volume-mute volume-icon';
+            } else if (this.value < 50) {
+                volumeIcon.className = 'fas fa-volume-down volume-icon';
+            } else {
+                volumeIcon.className = 'fas fa-volume-up volume-icon';
             }
         });
         
