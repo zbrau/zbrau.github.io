@@ -709,6 +709,19 @@
         .music-error.show {
             opacity: 1;
         }
+        
+        /* Reproductor de audio alternativo */
+        .audio-player {
+            width: 100%;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .audio-player audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -780,7 +793,7 @@
                     </h3>
                     <div class="playlist-item active" onclick="playSong(0)">
                         <div class="playlist-album">
-                            <img src="https://img.youtube.com/vi/2tUBqZG2A/mqdefault.jpg" alt="Long Drives">
+                            <img src="https://img.youtube.com/vi/2tUBqZG2Ab/mqdefault.jpg" alt="Long Drives">
                         </div>
                         <div class="playlist-number">1</div>
                         <div class="playlist-info">
@@ -868,7 +881,7 @@
     <div class="music-player">
         <div class="player-container">
             <div class="player-image">
-                <img src="https://img.youtube.com/vi/2tUBqZG2A/mqdefault.jpg" alt="Long Drives" id="playerAlbumArt">
+                <img src="https://img.youtube.com/vi/2tUBqZG2Ab/mqdefault.jpg" alt="Long Drives" id="playerAlbumArt">
             </div>
             <div class="player-info">
                 <div class="song-title" id="playerSongTitle">Long Drives</div>
@@ -890,16 +903,46 @@
                 </div>
             </div>
         </div>
+        <!-- Reproductor de audio HTML5 como alternativa -->
+        <div class="audio-player" id="audioPlayerContainer">
+            <audio id="audioElement" controls></audio>
+        </div>
     </div>
     
     <script>
         // Configuración de canciones con IDs correctos de YouTube
         const songs = [
-            { id: '2tUBqZG2A', title: 'Long Drives', duration: '2:31' },
-            { id: 'DevwFKEFrfo', title: 'Ghost', duration: '2:04', start: 20 },
-            { id: '7TQE48Wu8tQ', title: 'Toxic', duration: '2:13' },
-            { id: '4iV5W9uYEdY', title: 'IDGAF', duration: '2:22' },
-            { id: '2O9Lz9ZgQ3m', title: 'Sick of U', duration: '2:28' }
+            { 
+                id: '2tUBqZG2Ab', 
+                title: 'Long Drives', 
+                duration: '2:31',
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' // Audio de respaldo
+            },
+            { 
+                id: 'DevwFKEFrfo', 
+                title: 'Ghost', 
+                duration: '2:04', 
+                start: 20,
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' // Audio de respaldo
+            },
+            { 
+                id: '7TQE48Wu8tQ', 
+                title: 'Toxic', 
+                duration: '2:13',
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' // Audio de respaldo
+            },
+            { 
+                id: '4iV5W9uYEdY', 
+                title: 'IDGAF', 
+                duration: '2:22',
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3' // Audio de respaldo
+            },
+            { 
+                id: '2O9Lz9ZgQ3m', 
+                title: 'Sick of U', 
+                duration: '2:28',
+                audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3' // Audio de respaldo
+            }
         ];
         
         let currentSongIndex = 0;
@@ -907,6 +950,7 @@
         let isPlaying = false;
         let youtubeAPIReady = false;
         let playerReady = false;
+        let useAudioPlayer = false;
         
         // Sistema de acceso
         const correctPassword = 'euge2024';
@@ -999,18 +1043,49 @@
         function initializePlayer() {
             createParticles();
             
-            // Cargar la API de YouTube si no se ha cargado aún
-            if (typeof YT === 'undefined') {
-                console.log("Cargando API de YouTube");
-                const tag = document.createElement('script');
-                tag.src = "https://www.youtube.com/iframe_api";
-                const firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-            } else {
-                console.log("API de YouTube ya está cargada");
-                youtubeAPIReady = true;
-                createYouTubePlayer();
+            // Intentar cargar la API de YouTube
+            try {
+                if (typeof YT === 'undefined') {
+                    console.log("Cargando API de YouTube");
+                    const tag = document.createElement('script');
+                    tag.src = "https://www.youtube.com/iframe_api";
+                    const firstScriptTag = document.getElementsByTagName('script')[0];
+                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                } else {
+                    console.log("API de YouTube ya está cargada");
+                    youtubeAPIReady = true;
+                    createYouTubePlayer();
+                }
+            } catch (error) {
+                console.error("Error al cargar API de YouTube:", error);
+                // Usar reproductor de audio HTML5 como alternativa
+                useAudioPlayer = true;
+                initializeAudioPlayer();
             }
+        }
+        
+        function initializeAudioPlayer() {
+            console.log("Inicializando reproductor de audio HTML5");
+            document.getElementById('audioPlayerContainer').style.display = 'block';
+            const audioElement = document.getElementById('audioElement');
+            audioElement.src = songs[currentSongIndex].audioUrl;
+            
+            audioElement.addEventListener('play', function() {
+                isPlaying = true;
+                document.getElementById('playPauseIcon').className = 'fas fa-pause';
+            });
+            
+            audioElement.addEventListener('pause', function() {
+                isPlaying = false;
+                document.getElementById('playPauseIcon').className = 'fas fa-play';
+            });
+            
+            audioElement.addEventListener('ended', function() {
+                nextSong();
+            });
+            
+            // Configurar volumen inicial
+            audioElement.volume = 0.3;
         }
         
         function createYouTubePlayer() {
@@ -1027,7 +1102,9 @@
                         'playlist': songs[currentSongIndex].id,
                         'mute': 0,
                         'start': songs[currentSongIndex].start || 0,
-                        'origin': window.location.origin
+                        'origin': window.location.origin,
+                        'enablejsapi': 1,
+                        'widget_referrer': window.location.href
                     },
                     events: {
                         'onReady': onPlayerReady,
@@ -1037,13 +1114,17 @@
                 });
             } catch (error) {
                 console.error("Error al crear reproductor de YouTube:", error);
-                showMusicError();
+                // Usar reproductor de audio HTML5 como alternativa
+                useAudioPlayer = true;
+                initializeAudioPlayer();
             }
         }
         
         function onPlayerError(event) {
             console.error("Error en el reproductor de YouTube:", event.data);
-            showMusicError();
+            // Usar reproductor de audio HTML5 como alternativa
+            useAudioPlayer = true;
+            initializeAudioPlayer();
         }
         
         function showMusicError() {
@@ -1085,7 +1166,18 @@
             currentSongIndex = index;
             updatePlayerUI();
             
-            if (player && playerReady) {
+            if (useAudioPlayer) {
+                // Usar reproductor de audio HTML5
+                const audioElement = document.getElementById('audioElement');
+                audioElement.src = songs[index].audioUrl;
+                if (isPlaying) {
+                    audioElement.play().catch(error => {
+                        console.error("Error al reproducir audio:", error);
+                        showMusicError();
+                    });
+                }
+            } else if (player && playerReady) {
+                // Usar reproductor de YouTube
                 try {
                     player.loadVideoById({
                         videoId: songs[index].id,
@@ -1098,7 +1190,10 @@
                     }
                 } catch (error) {
                     console.error("Error al cargar video de YouTube:", error);
-                    showMusicError();
+                    // Usar reproductor de audio HTML5 como alternativa
+                    useAudioPlayer = true;
+                    initializeAudioPlayer();
+                    playSong(index);
                 }
             }
             
@@ -1121,7 +1216,19 @@
         }
         
         function togglePlayPause() {
-            if (player && playerReady) {
+            if (useAudioPlayer) {
+                // Usar reproductor de audio HTML5
+                const audioElement = document.getElementById('audioElement');
+                if (isPlaying) {
+                    audioElement.pause();
+                } else {
+                    audioElement.play().catch(error => {
+                        console.error("Error al reproducir audio:", error);
+                        showMusicError();
+                    });
+                }
+            } else if (player && playerReady) {
+                // Usar reproductor de YouTube
                 try {
                     if (isPlaying) {
                         player.pauseVideo();
@@ -1130,7 +1237,10 @@
                     }
                 } catch (error) {
                     console.error("Error al controlar reproductor de YouTube:", error);
-                    showMusicError();
+                    // Usar reproductor de audio HTML5 como alternativa
+                    useAudioPlayer = true;
+                    initializeAudioPlayer();
+                    togglePlayPause();
                 }
             }
         }
@@ -1150,7 +1260,14 @@
         const volumeIcon = document.querySelector('.volume-icon');
         
         volumeSlider.addEventListener('input', function() {
-            if (player && playerReady) {
+            const volume = this.value / 100;
+            
+            if (useAudioPlayer) {
+                // Usar reproductor de audio HTML5
+                const audioElement = document.getElementById('audioElement');
+                audioElement.volume = volume;
+            } else if (player && playerReady) {
+                // Usar reproductor de YouTube
                 try {
                     player.setVolume(this.value);
                 } catch (error) {
