@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Search, Home, Menu as MenuIcon, ShoppingBag, User as UserIcon, Bell, MapPin, Coins, QrCode, Check, X, LogOut, School, BookOpen, Users, ChevronRight, ArrowLeft, Loader2, Moon, Sun, ClipboardList, ShieldCheck, AlertCircle, DollarSign, Gift, Award, Sparkles, Flame, Clock, ChefHat, PackageCheck, History } from 'lucide-react';
+import { Search, Home, Menu as MenuIcon, ShoppingBag, User as UserIcon, Bell, MapPin, Coins, QrCode, Check, X, LogOut, School, BookOpen, Users, ChevronRight, ArrowLeft, Loader2, Moon, Sun, ClipboardList, ShieldCheck, AlertCircle, DollarSign, Gift, Award, Sparkles, Flame, Clock, ChefHat, PackageCheck, History, Trash2 } from 'lucide-react';
 import FoodItem from './components/FoodItem';
 import Cart from './components/Cart';
 import AIAssistant from './components/AIAssistant';
@@ -57,6 +57,7 @@ const App: React.FC = () => {
     const [adminFeedback, setAdminFeedback] = useState<{type: 'success'|'error', msg: string} | null>(null);
     const [isAdminProcessing, setIsAdminProcessing] = useState(false);
     const [adminTab, setAdminTab] = useState<'ACTIVE' | 'HISTORY' | 'RECHARGE'>('ACTIVE');
+    const [showClearHistoryModal, setShowClearHistoryModal] = useState(false);
 
     // --- Auth Form State ---
     const [loginEmail, setLoginEmail] = useState('');
@@ -298,6 +299,31 @@ const App: React.FC = () => {
         } catch (error) {
             console.error("Error updating order:", error);
             alert("No se pudo actualizar el estado. Intente de nuevo.");
+        } finally {
+            setIsAdminProcessing(false);
+        }
+    };
+
+    const handleClearHistory = async () => {
+        setIsAdminProcessing(true);
+        try {
+            // Get all completed orders
+            const completedOrdersQuery = db.collection("orders").where("status", "==", OrderStatus.COMPLETED);
+            const snapshot = await completedOrdersQuery.get();
+            
+            // Delete each completed order
+            const deletePromises = snapshot.docs.map(doc => doc.ref.delete());
+            await Promise.all(deletePromises);
+            
+            console.log(`${snapshot.docs.length} completed orders deleted from history.`);
+            setShowClearHistoryModal(false);
+            setAdminFeedback({ type: 'success', msg: `Se eliminaron ${snapshot.docs.length} pedidos del historial.` });
+            
+            // Clear feedback after 3 seconds
+            setTimeout(() => setAdminFeedback(null), 3000);
+        } catch (error) {
+            console.error("Error clearing history:", error);
+            setAdminFeedback({ type: 'error', msg: 'No se pudo limpiar el historial. Intente de nuevo.' });
         } finally {
             setIsAdminProcessing(false);
         }
@@ -833,6 +859,7 @@ const App: React.FC = () => {
         const historyOrders = orders.filter(o => o.status === OrderStatus.COMPLETED);
 
         return (
+        <>
         <div className="pb-24 animate-fade-in max-w-5xl mx-auto w-full">
              <div className="bg-white dark:bg-gray-900 p-6 shadow-sm sticky top-0 z-10 transition-colors rounded-xl mb-6">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -961,6 +988,22 @@ const App: React.FC = () => {
                 {/* --- TAB: HISTORIAL --- */}
                 {adminTab === 'HISTORY' && (
                     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                        {/* Header with Clear Button */}
+                        <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
+                            <div>
+                                <h3 className="text-lg font-bold text-gray-800 dark:text-white">Historial de Pedidos</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">{historyOrders.length} pedidos completados</p>
+                            </div>
+                            {historyOrders.length > 0 && (
+                                <button
+                                    onClick={() => setShowClearHistoryModal(true)}
+                                    className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg text-sm transition-colors"
+                                >
+                                    <Trash2 size={16} />
+                                    Limpiar Historial
+                                </button>
+                            )}
+                        </div>
                          <div className="overflow-x-auto">
                             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -1111,8 +1154,64 @@ const App: React.FC = () => {
                 )}
             </div>
         </div>
+
+        {/* Clear History Confirmation Modal */}
+        {showClearHistoryModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+                {/* Backdrop */}
+                <div 
+                    className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+                    onClick={() => setShowClearHistoryModal(false)}
+                />
+                
+                {/* Modal */}
+                <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 max-w-md w-full mx-4 animate-fade-in">
+                    <div className="flex items-start gap-4 mb-6">
+                        <div className="bg-red-100 dark:bg-red-900/30 p-3 rounded-full">
+                            <AlertCircle className="w-6 h-6 text-red-600 dark:text-red-400" />
+                        </div>
+                        <div className="flex-1">
+                            <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2">
+                                ¿Limpiar Historial?
+                            </h3>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                                Esta acción eliminará permanentemente <span className="font-bold text-red-600 dark:text-red-400">{historyOrders.length} pedidos</span> del historial. Esta acción no se puede deshacer.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div className="flex gap-3">
+                        <button
+                            onClick={() => setShowClearHistoryModal(false)}
+                            disabled={isAdminProcessing}
+                            className="flex-1 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            onClick={handleClearHistory}
+                            disabled={isAdminProcessing}
+                            className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                        >
+                            {isAdminProcessing ? (
+                                <>
+                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                    Eliminando...
+                                </>
+                            ) : (
+                                <>
+                                    <Trash2 size={16} />
+                                    Sí, Limpiar
+                                </>
+                            )}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+        </>
     );
-    }
+    };
 
     const HomeScreen = () => {
         const points = user?.loyaltyPoints || 0;
