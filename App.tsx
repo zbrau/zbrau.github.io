@@ -59,6 +59,10 @@ const App: React.FC = () => {
     const [adminTab, setAdminTab] = useState<'ACTIVE' | 'HISTORY' | 'RECHARGE'>('ACTIVE');
     const [showClearHistoryModal, setShowClearHistoryModal] = useState(false);
 
+    // --- User Orders State ---
+    const [showUserClearHistoryModal, setShowUserClearHistoryModal] = useState(false);
+    const [isUserProcessing, setIsUserProcessing] = useState(false);
+
     // --- Auth Form State ---
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPass, setLoginPass] = useState('');
@@ -326,6 +330,34 @@ const App: React.FC = () => {
             setAdminFeedback({ type: 'error', msg: 'No se pudo limpiar el historial. Intente de nuevo.' });
         } finally {
             setIsAdminProcessing(false);
+        }
+    };
+
+    const handleUserClearHistory = async () => {
+        if (!user) return;
+        
+        setIsUserProcessing(true);
+        try {
+            // Get only the current user's completed orders
+            const userCompletedOrdersQuery = db.collection("orders")
+                .where("userId", "==", user.email)
+                .where("status", "==", OrderStatus.COMPLETED);
+            const snapshot = await userCompletedOrdersQuery.get();
+            
+            // Delete each completed order
+            const deletePromises = snapshot.docs.map(doc => doc.ref.delete());
+            await Promise.all(deletePromises);
+            
+            console.log(`${snapshot.docs.length} user completed orders deleted from history.`);
+            setShowUserClearHistoryModal(false);
+            
+            // Show temporary success feedback (we could add a toast/alert here if needed)
+            alert(`Se eliminaron ${snapshot.docs.length} pedidos completados del historial.`);
+        } catch (error) {
+            console.error("Error clearing user history:", error);
+            alert('No se pudo limpiar el historial. Intente de nuevo.');
+        } finally {
+            setIsUserProcessing(false);
         }
     };
 
@@ -1506,9 +1538,25 @@ const App: React.FC = () => {
         </div>
     );
 
-    const OrdersScreen = () => (
+    const OrdersScreen = () => {
+        // Filter completed orders for this user
+        const userCompletedOrders = orders.filter(o => o.status === OrderStatus.COMPLETED);
+        
+        return (
+        <>
         <div className="pt-6 pb-24 space-y-6 max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Mis Pedidos</h2>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+                <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Mis Pedidos</h2>
+                {userCompletedOrders.length > 0 && (
+                    <button
+                        onClick={() => setShowUserClearHistoryModal(true)}
+                        className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg text-sm transition-colors"
+                    >
+                        <Trash2 size={16} />
+                        Limpiar Historial
+                    </button>
+                )}
+            </div>
             {isLoadingOrders ? (
                 <div className="flex justify-center py-20"><Loader2 className="animate-spin text-green-600 w-8 h-8"/></div>
             ) : orders.length === 0 ? (
@@ -1588,7 +1636,64 @@ const App: React.FC = () => {
                 </div>
             )}
         </div>
-    );
+
+        {/* User Clear History Confirmation Modal */}
+        {showUserClearHistoryModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+                {/* Backdrop */}
+                <div 
+                    className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+                    onClick={() => setShowUserClearHistoryModal(false)}
+                />
+                
+                {/* Modal */}
+                <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 max-w-md w-full mx-4 animate-fade-in">
+                    <div className="flex items-start gap-4 mb-6">
+                        <div className="bg-red-100 dark:bg-red-900/30 p-3 rounded-full">
+                            <AlertCircle className="w-6 h-6 text-red-600 dark:text-red-400" />
+                        </div>
+                        <div className="flex-1">
+                            <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2">
+                                ¿Limpiar Historial de Pedidos?
+                            </h3>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                                Esta acción eliminará permanentemente <span className="font-bold text-red-600 dark:text-red-400">{userCompletedOrders.length} pedidos completados</span> de tu historial. Esta acción no se puede deshacer.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div className="flex gap-3">
+                        <button
+                            onClick={() => setShowUserClearHistoryModal(false)}
+                            disabled={isUserProcessing}
+                            className="flex-1 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            onClick={handleUserClearHistory}
+                            disabled={isUserProcessing}
+                            className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                        >
+                            {isUserProcessing ? (
+                                <>
+                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                    Eliminando...
+                                </>
+                            ) : (
+                                <>
+                                    <Trash2 size={16} />
+                                    Sí, Limpiar
+                                </>
+                            )}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+        </>
+        );
+    };
 
     const ProfileScreen = () => (
         <div className="px-4 pt-6 pb-24 max-w-2xl mx-auto">
